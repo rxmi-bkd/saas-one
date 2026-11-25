@@ -27,4 +27,10 @@ public class BudgetMembershipEntity {
   @Enumerated(EnumType.STRING)
   @Column(nullable = false, updatable = true, unique = false)
   private BudgetRoleEnum role;
+
+  public BudgetMembershipEntity(UUID userId, UUID budgetId, BudgetRoleEnum role) {
+    this.userId = userId;
+    this.budgetId = budgetId;
+    this.role = role;
+  }
 }
