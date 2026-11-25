@@ -7,6 +7,10 @@
 - Never leave a doc describing behavior the project no longer has.
 - When you add a new topic that deserves documentation, add a file in `docs/`.
 
+## Code style
+
+- Always assign intermediate objects to a named local variable before passing them to a call or returning them; do not nest object creation inline in call arguments.
+
 ## Branch names
 
 - Format: `<type>/<short-kebab-case-description>`
