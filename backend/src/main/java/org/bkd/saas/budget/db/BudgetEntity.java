@@ -22,4 +22,9 @@ public class BudgetEntity {
 
   @Column(nullable = false, updatable = true, unique = false)
   private String currency;
+
+  public BudgetEntity(String name, String currency) {
+    this.name = name;
+    this.currency = currency;
+  }
 }
