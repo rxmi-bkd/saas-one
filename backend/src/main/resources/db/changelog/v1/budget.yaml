@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1792069700151-1
+      author: rxmi-bkd
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_budget
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: currency
+                  type: VARCHAR(255)
+            tableName: budget
+  - changeSet:
+      id: 1792069700151-2
+      author: rxmi-bkd
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_budget_membership
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: budget_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role
+                  type: VARCHAR(255)
+            tableName: budget_membership
+  - changeSet:
+      id: 1792069700151-3
+      author: rxmi-bkd
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: user_id, budget_id
+            constraintName: uc_budget_membership_user_id_budget_id
+            tableName: budget_membership
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: budget_membership
+            constraintName: fk_budget_membership_user
+            referencedColumnNames: id
+            referencedTableName: app_user
+        - addForeignKeyConstraint:
+            baseColumnNames: budget_id
+            baseTableName: budget_membership
+            constraintName: fk_budget_membership_budget
+            referencedColumnNames: id
+            referencedTableName: budget
