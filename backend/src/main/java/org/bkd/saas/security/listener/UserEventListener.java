@@ -5,10 +5,11 @@ import org.bkd.saas.security.service.EmailService;
 import org.bkd.saas.security.service.SessionService;
 import org.bkd.saas.user.event.UserCreatedEvent;
 import org.bkd.saas.user.event.UserPasswordUpdatedEvent;
-import org.springframework.stereotype.Service;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class UserEventListener {
 
@@ -20,7 +21,7 @@ public class UserEventListener {
     emailService.sendActivationEmail(event.userId(), event.email());
   }
 
-  @TransactionalEventListener
+  @EventListener
   public void onUserPasswordUpdatedEvent(UserPasswordUpdatedEvent event) {
     if (event.currentSessionId() == null) {
       sessionService.deleteAllSessions(event.userId());

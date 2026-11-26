@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/v1/seed-users.yaml
   - include:
       file: db/changelog/v1/email-lowercase-check.yaml
+  - include:
+      file: db/changelog/v1/budget.yaml

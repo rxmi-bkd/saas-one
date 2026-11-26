@@ -33,9 +33,9 @@ jobs:
       matrix:
         include:
           - context: backend
-            image: ghcr.io/rxmi-bkd-organization/saas-backend
+            image: ghcr.io/rxmi-bkd/saas-one-backend
           - context: frontend
-            image: ghcr.io/rxmi-bkd-organization/saas-frontend
+            image: ghcr.io/rxmi-bkd/saas-one-frontend
     steps:
       - uses: actions/checkout@v4
 
@@ -79,4 +79,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           source: compose.production.yml,postgresql.conf,scripts/deploy.sh
-          target: /home/github-actions/saas
+          target: /home/github-actions/saas-one
