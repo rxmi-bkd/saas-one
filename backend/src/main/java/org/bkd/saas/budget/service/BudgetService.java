@@ -1,5 +1,6 @@
 package org.bkd.saas.budget.service;
 
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.bkd.saas.budget.db.BudgetEntity;
@@ -30,5 +31,12 @@ public class BudgetService {
     budgetMembershipRepository.save(membership);
 
     return budgetMapper.toBudgetDto(budget);
+  }
+
+  public List<BudgetDto> readBudgets(UUID userId) {
+    List<BudgetMembershipEntity> memberships = budgetMembershipRepository.findAllByUserId(userId);
+    List<UUID> budgetIds = memberships.stream().map(BudgetMembershipEntity::getBudgetId).toList();
+    List<BudgetEntity> budgets = budgetRepository.findAllById(budgetIds);
+    return budgets.stream().map(budgetMapper::toBudgetDto).toList();
   }
 }
